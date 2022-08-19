@@ -16,14 +16,26 @@ def restaurant_ratings(filename):
         restaurant_scores = line.split(':')
         restaurant, rating = restaurant_scores
         for restaurant_score in restaurant_scores:
-            ratings[restaurant] = rating
-    #sorted(ratings.keys())
-
-    #ratings = {restaurant : ratings[restaurant] for restaurant in ratings}
-            
+            ratings[restaurant] = rating   
     
     ratings = dict(sorted(ratings.items()))
-    
-    print(ratings)
 
-restaurant_ratings('scores.txt')
+    #print(ratings)
+    return ratings
+
+dictionary = restaurant_ratings('scores.txt')
+
+def take_restaurant_and_score_input(dictionary_name):
+
+    user_restaurant_prompt = input("Enter restaurant name: ")
+
+    user_score_prompt = input("Enter your score for the restaurant: ")
+
+    dictionary_name[user_restaurant_prompt] = user_score_prompt
+
+    dictionary_name = dict(sorted(dictionary_name.items()))
+
+    print(dictionary_name)
+
+#restaurant_ratings('scores.txt')
+take_restaurant_and_score_input(dictionary)
