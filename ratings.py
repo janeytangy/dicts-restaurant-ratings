@@ -2,27 +2,38 @@
 
 import sys 
 
-def tokenize(filename):
-    """Create a list of restaurant profiles--including the name and score."""
+def restaurant_rating_dictionary(filename):
+    """Create a dictionary from a file of restaurant profiles including the name and score."""
+
+    restaurant_ratings = {}
 
     with open(filename) as input_file:
         for line in input_file:
             restaurant_profiles = line.rstrip().split(':')
             restaurant_name, restaurant_score = restaurant_profiles
-    
-    return restaurant_profiles       
+            for restaurant_profile in restaurant_profiles:
+                restaurant_ratings[restaurant_name] = restaurant_score 
 
-def restaurant_rating_dict(restaurant_profiles):
-    """Sort restaurant ratings from a created list in alphabetical order."""
+    restaurant_ratings = dict(sorted(restaurant_ratings.items()))
 
-    restaurant_ratings = {}
+    return restaurant_ratings  
 
-        for restaurant_profile in restaurant_profiles:
-            restaurant_ratings[restaurant_name] = restaurant_score  
-    
+def take_restaurant_profile_input(restaurant_ratings):
+    """Take user input to add another restaurant profile to the restaurant rating dictionary."""
+
+    user_restaurant_prompt = input("Enter restaurant name: ")
+
+    user_score_prompt = input("Enter your score for the restaurant: ")
+
+    restaurant_ratings[user_restaurant_prompt] = user_score_prompt
+
     restaurant_ratings = dict(sorted(restaurant_ratings.items()))
 
     return restaurant_ratings
+
+filename = sys.argv[1]
+restaurant_ratings = restaurant_rating_dictionary(filename)
+print(take_restaurant_profile_input(restaurant_ratings))
 
 # def restaurant_ratings(filename):
 
@@ -38,23 +49,21 @@ def restaurant_rating_dict(restaurant_profiles):
 
 #     return restaurant_profiles 
 
-dictionary = restaurant_ratings('scores.txt')
+# dictionary = restaurant_ratings()
 
-def take_restaurant_profile_input(dictionary_name):
+# def take_restaurant_profile_input(dictionary_name):
+#     """Take user input to add another restaurant profile to the restaurant rating dictionary."""
 
-    user_restaurant_prompt = input("Enter restaurant name: ")
+#     user_restaurant_prompt = input("Enter restaurant name: ")
 
-    user_score_prompt = input("Enter your score for the restaurant: ")
+#     user_score_prompt = input("Enter your score for the restaurant: ")
 
-    dictionary_name[user_restaurant_prompt] = user_score_prompt
+#     dictionary_name[user_restaurant_prompt] = user_score_prompt
 
-    dictionary_name = dict(sorted(dictionary_name.items()))
+#     dictionary_name = dict(sorted(dictionary_name.items()))
 
-    print(dictionary_name)
+#     return dictionary_name
 
 # restaurant_ratings('scores.txt')
 # take_restaurant_and_score_input(dictionary)
 
-filename = sys.argv[1]
-restaurant_profiles = tokenize(filename)
-restaurant_ratings = restaurant_rating_dict(restaurant_profiles)
